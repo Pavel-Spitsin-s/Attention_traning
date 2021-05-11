@@ -1,4 +1,5 @@
 package com.example.myapplication;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -21,7 +22,15 @@ public class Game extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(new GameView(this));
+        GameView game = new GameView(this, new DrawThread.OnPostExecute() {
+            @Override
+            public void doOnPost() {
+                Intent intent = new Intent();
+                intent.setClass(Game.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+        setContentView(game);
     }
 }
 

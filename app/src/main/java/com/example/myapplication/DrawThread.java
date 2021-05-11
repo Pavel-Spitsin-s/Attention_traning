@@ -7,14 +7,25 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.os.Handler;
+import android.os.Message;
 import android.view.SurfaceHolder;
 
+import androidx.annotation.NonNull;
+
+import java.util.Date;
 import java.util.Random;
 
 public class DrawThread extends Thread{
+    interface OnPostExecute{
+    void doOnPost();
+}
     private SurfaceHolder surfaceHolder;
     private Bitmap bitmap;
+    private Bitmap bitmap_rb;
+    private Bitmap bitmap_andr;
     private static final int capacity = 5;
+    private OnPostExecute onPostExecute = null;
 
     private volatile boolean running = true;//флаг для остановки потока
 
@@ -24,35 +35,82 @@ public class DrawThread extends Thread{
         backgroundPaint.setColor(Color.BLUE);
         backgroundPaint.setStyle(Paint.Style.FILL);
     }
+    private Paint TimerPaint = new Paint();
+    {
+        TimerPaint.setColor(Color.BLACK);
+        TimerPaint.setStyle(Paint.Style.FILL);
+        TimerPaint.setTextSize(250);
+    }
+
+
 
 
     public DrawThread(Context context, SurfaceHolder surfaceHolder) {
         bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.br);
+        bitmap_andr = BitmapFactory.decodeResource(context.getResources(), R.drawable.andr);
+        bitmap_rb = BitmapFactory.decodeResource(context.getResources(), R.drawable.red_ball);
         this.surfaceHolder = surfaceHolder;
     }
 
     public void requestStop() {
         running = false;
     }
-
+    int k = 0;
+    int x, y;
     @Override
     public void run() {
         while (running) {
+            if (k == 0){
+                TimeCounter.run("15");
+            }
             Canvas canvas = surfaceHolder.lockCanvas();
             if (canvas != null) {
                 try {
+                    if (TimeCounter.secs_to_output.equals("0")){
+                        running = false;
+                    }
                     canvas.drawRect(0, 0, canvas.getWidth(), canvas.getHeight(), backgroundPaint);
+                    canvas.drawText(TimeCounter.secs_to_output, (float)canvas.getWidth() / (float)2 - 150, 200, TimerPaint);
+
                     int size = Math.min(canvas.getWidth() / capacity, canvas.getHeight() / capacity);
                     Random random = new Random();
-                    int x = size * (random.nextInt() % (canvas.getWidth() / size));
-                    int y = size * (random.nextInt() % (canvas.getHeight() / size));
-                    canvas.drawBitmap(bitmap, new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight()),
-                            new Rect(x, y, x + size, y + size), backgroundPaint);
+                    if (k % 50 == 0){
+                        x = size * (random.nextInt() % (canvas.getWidth() / size));
+                        y = size * (random.nextInt() % (canvas.getHeight() / size));
+                    }
+                    if (k <= 50){
+                        canvas.drawBitmap(bitmap, new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight()),
+                                new Rect(x, y, x + size, y + size), backgroundPaint);
+
+                    }
+                    else if (k <= 100){
+                        bitmap = bitmap_andr;
+                        canvas.drawBitmap(bitmap, new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight()),
+                                new Rect(x, y, x + size, y + size), backgroundPaint);
+                    }
+                    else{
+                        bitmap = bitmap_rb;
+                        canvas.drawBitmap(bitmap, new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight()),
+                                new Rect(x, y, x + size, y + size), backgroundPaint);
+                    }
+                    k += 1;
                 } finally {
                     surfaceHolder.unlockCanvasAndPost(canvas);
 
                 }
             }
         }
+        handler.sendMessage(handler.obtainMessage());
     }
+
+    public void setOnPostExecuteAction(OnPostExecute onPostExecute){
+        this.onPostExecute = onPostExecute;
+    }
+
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            if (onPostExecute != null) onPostExecute.doOnPost();
+        }
+    };
 }

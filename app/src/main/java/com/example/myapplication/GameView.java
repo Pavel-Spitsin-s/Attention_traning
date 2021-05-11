@@ -4,17 +4,22 @@ import android.content.Context;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import java.util.logging.Handler;
+
 public class GameView extends SurfaceView implements SurfaceHolder.Callback{
     private DrawThread drawThread;
+    private DrawThread.OnPostExecute onPostExecute;
 
-    public GameView(Context context) {
+    public GameView(Context context, DrawThread.OnPostExecute onPostExecute) {
         super(context);
         getHolder().addCallback(this);
+        this.onPostExecute = onPostExecute;
     }
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         drawThread = new DrawThread(getContext(),getHolder());
+        drawThread.setOnPostExecuteAction(onPostExecute);
         drawThread.start();
     }
 
