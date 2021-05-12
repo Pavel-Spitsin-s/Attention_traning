@@ -26,7 +26,9 @@ public class DrawThread extends Thread{
     private Bitmap bitmap_andr;
     private static final int capacity = 5;
     private OnPostExecute onPostExecute = null;
-
+    public static int check_bombs;
+    public static int check_androids;
+    public static int check_red_balls;
     private volatile boolean running = true;//флаг для остановки потока
 
 
@@ -56,12 +58,13 @@ public class DrawThread extends Thread{
         running = false;
     }
     int k = 0;
+    int pk = -1;
     int x, y;
     @Override
     public void run() {
         while (running) {
             if (k == 0){
-                TimeCounter.run("15");
+                TimeCounter.run("3");
             }
             Canvas canvas = surfaceHolder.lockCanvas();
             if (canvas != null) {
@@ -74,16 +77,21 @@ public class DrawThread extends Thread{
 
                     int size = Math.min(canvas.getWidth() / capacity, canvas.getHeight() / capacity);
                     Random random = new Random();
-                    if (k % 50 == 0){
+                    if (k != pk){
+//                        if (k <= 50) check_bombs += 1;
+//                        else if (k <= 100) check_androids += 1;
+//                        else{
+//                            check_red_balls += 1;
+//                        }
                         x = size * (random.nextInt() % (canvas.getWidth() / size));
                         y = size * (random.nextInt() % (canvas.getHeight() / size));
                     }
-                    if (k <= 50){
+                    if ( k == 3){
                         canvas.drawBitmap(bitmap, new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight()),
                                 new Rect(x, y, x + size, y + size), backgroundPaint);
 
                     }
-                    else if (k <= 100){
+                    else if (k == 2){
                         bitmap = bitmap_andr;
                         canvas.drawBitmap(bitmap, new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight()),
                                 new Rect(x, y, x + size, y + size), backgroundPaint);
@@ -93,7 +101,9 @@ public class DrawThread extends Thread{
                         canvas.drawBitmap(bitmap, new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight()),
                                 new Rect(x, y, x + size, y + size), backgroundPaint);
                     }
-                    k += 1;
+                    pk = k;
+                    k = Integer.parseInt(TimeCounter.secs_to_output);
+                    System.out.println(check_bombs + " " + check_androids + " "  +check_red_balls);
                 } finally {
                     surfaceHolder.unlockCanvasAndPost(canvas);
 

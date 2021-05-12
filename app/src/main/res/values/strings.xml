@@ -3,4 +3,9 @@
     <string name="Title">Игра на внимание</string>
     <string name="play">Играть</string>
     <string name="exit">Выход</string>
+    <string name="tv">Введите количество, каждого увиденного объекта</string>
+    <string name="et">Введите количество бомб</string>
+    <string name="et2">Введите количество андроидов</string>
+    <string name="et3">Введите количество кругов</string>
+    <string name="ok">ОК</string>
 </resources>

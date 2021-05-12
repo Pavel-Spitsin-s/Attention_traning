@@ -26,7 +26,7 @@ public class Game extends AppCompatActivity {
             @Override
             public void doOnPost() {
                 Intent intent = new Intent();
-                intent.setClass(Game.this, MainActivity.class);
+                intent.setClass(Game.this, InputActivity.class);
                 startActivity(intent);
             }
         });

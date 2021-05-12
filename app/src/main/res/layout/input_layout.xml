@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="114dp"
+        android:text="@string/tv"
+        android:textAlignment="center"
+        android:textSize="30dp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="179dp"
+        android:src="@drawable/br" />
+
+    <EditText
+        android:id="@+id/count_of_bombs"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:inputType="number"
+        android:textColor="@color/black"
+        android:hint="@string/et"
+        android:textAlignment="center"
+
+        />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="match_parent"
+        android:layout_height="149dp"
+        android:src="@drawable/andr" />
+
+    <EditText
+        android:id="@+id/count_of_androids"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:textColor="@color/black"
+        android:hint="@string/et2"
+        android:textAlignment="center"
+
+        />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="match_parent"
+        android:layout_height="157dp"
+        android:src="@drawable/red_ball" />
+
+    <EditText
+        android:id="@+id/count_of_red_balls"
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:inputType="number"
+        android:textColor="@color/black"
+        android:hint="@string/et3"
+        android:textAlignment="center"
+        />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ok"
+        />
+
+</LinearLayout>
