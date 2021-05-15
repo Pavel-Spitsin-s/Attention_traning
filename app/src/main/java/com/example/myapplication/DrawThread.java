@@ -86,7 +86,7 @@ public class DrawThread extends Thread{
                         x = size * (random.nextInt() % (canvas.getWidth() / size));
                         y = size * (random.nextInt() % (canvas.getHeight() / size));
                     }
-                    if ( k == 3){
+                    if (k == 3){
                         canvas.drawBitmap(bitmap, new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight()),
                                 new Rect(x, y, x + size, y + size), backgroundPaint);
 

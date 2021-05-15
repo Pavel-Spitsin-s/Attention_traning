@@ -36,8 +36,24 @@ public class InputActivity extends Activity {
                 int count_of_bombs_int = Integer.parseInt(count_of_bombs.getText().toString());
                 int count_of_androids_int = Integer.parseInt(count_of_androids.getText().toString());
                 int count_of_red_balls_int = Integer.parseInt(count_of_red_balls.getText().toString());
+                count_of_androids_int = 0;
+                count_of_bombs_int = 0;
+                count_of_red_balls_int = 0;
+                if (count_of_androids_int == DrawThread.check_androids &&
+                        count_of_bombs_int == DrawThread.check_bombs &&
+                        count_of_red_balls_int == DrawThread.check_red_balls) {
+                    Intent intent = new Intent();
+                    intent.setClass(InputActivity.this, Game.class);
+                    startActivity(intent);
+                }
+                else {
+                    Intent intent = new Intent();
+                    intent.setClass(InputActivity.this, GameOver.class);
+                    startActivity(intent);
+                }
             }
         };
+
     }
 }
 

@@ -8,4 +8,6 @@
     <string name="et2">Введите количество андроидов</string>
     <string name="et3">Введите количество кругов</string>
     <string name="ok">ОК</string>
+    <string name="game_over">Игра окончена</string>
+    <string name="home">На главную</string>
 </resources>
