@@ -30,15 +30,18 @@ public class InputActivity extends Activity {
         EditText count_of_androids = (EditText) findViewById(R.id.count_of_androids);
         EditText count_of_red_balls = (EditText) findViewById(R.id.count_of_red_balls);
         Button btn = (Button) findViewById(R.id.button3);
-        View.OnClickListener listener = new View.OnClickListener() {
+        btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int count_of_bombs_int = Integer.parseInt(count_of_bombs.getText().toString());
                 int count_of_androids_int = Integer.parseInt(count_of_androids.getText().toString());
                 int count_of_red_balls_int = Integer.parseInt(count_of_red_balls.getText().toString());
-                count_of_androids_int = 0;
-                count_of_bombs_int = 0;
-                count_of_red_balls_int = 0;
+//                count_of_androids_int = 0;
+//                count_of_bombs_int = 0;
+//                count_of_red_balls_int = 0;
+//                System.out.println(DrawThread.check_androids);
+//                System.out.println(DrawThread.check_bombs);
+//                System.out.println(DrawThread.check_red_balls);
                 if (count_of_androids_int == DrawThread.check_androids &&
                         count_of_bombs_int == DrawThread.check_bombs &&
                         count_of_red_balls_int == DrawThread.check_red_balls) {
@@ -52,7 +55,7 @@ public class InputActivity extends Activity {
                     startActivity(intent);
                 }
             }
-        };
+        });
 
     }
 }

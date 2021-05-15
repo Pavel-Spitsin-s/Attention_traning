@@ -69,6 +69,7 @@ public class DrawThread extends Thread{
             Canvas canvas = surfaceHolder.lockCanvas();
             if (canvas != null) {
                 try {
+                    k = Integer.parseInt(TimeCounter.secs_to_output);
                     if (TimeCounter.secs_to_output.equals("0")){
                         running = false;
                     }
@@ -83,12 +84,14 @@ public class DrawThread extends Thread{
 //                        else{
 //                            check_red_balls += 1;
 //                        }
-                        x = size * (random.nextInt() % (canvas.getWidth() / size));
-                        y = size * (random.nextInt() % (canvas.getHeight() / size));
+                        x = size * random.nextInt(canvas.getWidth() / size);
+                        y = size * random.nextInt(canvas.getHeight() / size);
                     }
+                    System.out.println("x = " + x + " " + y);
                     if (k == 3){
                         canvas.drawBitmap(bitmap, new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight()),
                                 new Rect(x, y, x + size, y + size), backgroundPaint);
+
 
                     }
                     else if (k == 2){
@@ -102,7 +105,7 @@ public class DrawThread extends Thread{
                                 new Rect(x, y, x + size, y + size), backgroundPaint);
                     }
                     pk = k;
-                    k = Integer.parseInt(TimeCounter.secs_to_output);
+
                     System.out.println(check_bombs + " " + check_androids + " "  +check_red_balls);
                 } finally {
                     surfaceHolder.unlockCanvasAndPost(canvas);
