@@ -29,9 +29,9 @@ public class DrawThread extends Thread{
     public static int check_bombs;
     public static int check_androids;
     public static int check_red_balls;
+    public static int secs = 3;
     private volatile boolean running = true;//флаг для остановки потока
-
-
+    public static Context context;
     private Paint backgroundPaint = new Paint();
     {
         backgroundPaint.setColor(Color.BLUE);
@@ -48,6 +48,7 @@ public class DrawThread extends Thread{
 
 
     public DrawThread(Context context, SurfaceHolder surfaceHolder) {
+        DrawThread.context = context;
         bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.br);
         bitmap_andr = BitmapFactory.decodeResource(context.getResources(), R.drawable.andr);
         bitmap_rb = BitmapFactory.decodeResource(context.getResources(), R.drawable.red_ball);
@@ -64,7 +65,7 @@ public class DrawThread extends Thread{
     public void run() {
         while (running) {
             if (k == 0){
-                TimeCounter.run("3");
+                TimeCounter.run(String.valueOf(secs));
             }
             Canvas canvas = surfaceHolder.lockCanvas();
             if (canvas != null) {
@@ -84,22 +85,34 @@ public class DrawThread extends Thread{
 //                        else{
 //                            check_red_balls += 1;
 //                        }
+                        if (k % 3 == 0){
+                            DrawThread.check_bombs += 1;
+                        }
+                        else if (k % 3 == 2){
+                            DrawThread.check_androids += 1;
+                        }
+                        else{
+                            DrawThread.check_red_balls += 1;
+                        }
                         x = size * random.nextInt(canvas.getWidth() / size);
                         y = size * random.nextInt(canvas.getHeight() / size);
                     }
                     System.out.println("x = " + x + " " + y);
-                    if (k == 3){
+                    if (k % 3 == 0){
+                        bitmap = BitmapFactory.decodeResource(DrawThread.context.getResources(), R.drawable.br);
                         canvas.drawBitmap(bitmap, new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight()),
                                 new Rect(x, y, x + size, y + size), backgroundPaint);
 
 
                     }
-                    else if (k == 2){
+                    else if (k % 3 == 2){
+
                         bitmap = bitmap_andr;
                         canvas.drawBitmap(bitmap, new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight()),
                                 new Rect(x, y, x + size, y + size), backgroundPaint);
                     }
                     else{
+
                         bitmap = bitmap_rb;
                         canvas.drawBitmap(bitmap, new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight()),
                                 new Rect(x, y, x + size, y + size), backgroundPaint);

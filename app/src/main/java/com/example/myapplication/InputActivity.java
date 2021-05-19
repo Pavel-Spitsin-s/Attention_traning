@@ -45,15 +45,25 @@ public class InputActivity extends Activity {
                 if (count_of_androids_int == DrawThread.check_androids &&
                         count_of_bombs_int == DrawThread.check_bombs &&
                         count_of_red_balls_int == DrawThread.check_red_balls) {
+                    DrawThread.secs += 5 - DrawThread.secs % 5;
+                    DrawThread.check_bombs = 0;
+                    DrawThread.check_red_balls = 0;
+                    DrawThread.check_androids = 0;
                     Intent intent = new Intent();
                     intent.setClass(InputActivity.this, Game.class);
                     startActivity(intent);
                 }
                 else {
+                    System.out.println(DrawThread.check_bombs + " bombs");
+                    System.out.println(DrawThread.check_red_balls + " red_balls");
+                    System.out.println(DrawThread.check_androids + " androids");
                     Intent intent = new Intent();
                     intent.setClass(InputActivity.this, GameOver.class);
                     startActivity(intent);
                 }
+//                DrawThread.check_bombs = 0;
+//                DrawThread.check_red_balls = 0;
+//                DrawThread.check_androids = 0;
             }
         });
 
