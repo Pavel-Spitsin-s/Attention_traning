@@ -2,11 +2,16 @@ package com.example.myapplication;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageSwitcher;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -25,7 +30,10 @@ public class InputActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.input_layout);
+        PictureEtAdapter adapter = new PictureEtAdapte(this, make_p_et());
+        ListView listView = (ListView) findViewById(R.id.listView);
         EditText count_of_bombs = (EditText) findViewById(R.id.count_of_bombs);
         EditText count_of_androids = (EditText) findViewById(R.id.count_of_androids);
         EditText count_of_red_balls = (EditText) findViewById(R.id.count_of_red_balls);
@@ -33,9 +41,18 @@ public class InputActivity extends Activity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int count_of_bombs_int = Integer.parseInt(count_of_bombs.getText().toString());
-                int count_of_androids_int = Integer.parseInt(count_of_androids.getText().toString());
-                int count_of_red_balls_int = Integer.parseInt(count_of_red_balls.getText().toString());
+                int count_of_bombs_int = 0;
+                int count_of_androids_int = 0;
+                int count_of_red_balls_int = 0 ;
+                try {
+                    count_of_bombs_int = Integer.parseInt(count_of_bombs.getText().toString());
+                    count_of_androids_int = Integer.parseInt(count_of_androids.getText().toString());
+                    count_of_red_balls_int = Integer.parseInt(count_of_red_balls.getText().toString());
+                } catch (NumberFormatException e) {
+                    Toast toast = Toast.makeText(getApplicationContext(),
+                            "Все поля должны быть заполнены!", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
 //                count_of_androids_int = 0;
 //                count_of_bombs_int = 0;
 //                count_of_red_balls_int = 0;
@@ -68,5 +85,19 @@ public class InputActivity extends Activity {
         });
 
     }
+    PictureEt[] make_p_et () {
+        PictureEt[] arr = new PictureEt[12];
+        Bitmap[] bitmapArr = {BitmapFactory.decodeResource(DrawThread.context.getResources(), R.drawable.br),
+                BitmapFactory.decodeResource(DrawThread.context.getResources(), R.drawable.red_ball),
+                BitmapFactory.decodeResource(DrawThread.context.getResources(), R.drawable.andr)};
+        for (int i = 0; i < arr.length; i++) {
+            PictureEt p_et = new PictureEt();
+            p_et.bitmap = bitmapArr[i];
+            arr[i] = p_et;
+        }
+        return arr;
+    }
+
+
 }
 

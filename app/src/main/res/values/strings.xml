@@ -2,7 +2,7 @@
     <string name="app_name">My Application</string>
     <string name="Title">Игра на внимание</string>
     <string name="play">Играть</string>
-    <string name="exit">Выход</string>
+    <string name="exit"> Выход </string>
     <string name="tv">Введите количество, каждого увиденного объекта</string>
     <string name="et">Введите количество бомб</string>
     <string name="et2">Введите количество андроидов</string>
@@ -10,4 +10,5 @@
     <string name="ok">ОК</string>
     <string name="game_over">Игра окончена</string>
     <string name="home">На главную</string>
+    <string name="adapter_hint">Введите количество</string>
 </resources>

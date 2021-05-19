@@ -13,7 +13,7 @@
         android:layout_marginTop="36dp"
         android:text="@string/Title"
         android:gravity="center"
-        android:textSize="50dp"
+        android:textSize="80dp"
         android:textColor="#000"/>
 
     <Button
@@ -22,9 +22,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="250dp"
         android:text="@string/play"
-        android:textSize="30dp"
+        android:textSize="70dp"
         android:textColor="#000"
         android:background="#8b00ff"/>
 
@@ -34,9 +34,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="270dp"
+        android:layout_marginTop="470dp"
         android:text="@string/exit"
-        android:textSize="30dp"
+        android:textSize="70dp"
         android:textColor="#000"
         android:background="#8b00ff"/>
 </RelativeLayout>

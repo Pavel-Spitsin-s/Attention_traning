@@ -5,38 +5,26 @@
     android:background="#fff" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/textView_go"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="36dp"
-        android:text="@string/Title"
+        android:text="@string/game_over"
         android:gravity="center"
-        android:textSize="50dp"
+        android:textSize="80dp"
         android:textColor="#000"/>
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/button_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="180dp"
-        android:text="@string/play"
-        android:textSize="30dp"
+        android:layout_marginTop="250dp"
+        android:text="@string/home"
+        android:textSize="60dp"
         android:textColor="#000"
-        android:background="#8b00ff"/>
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="270dp"
-        android:text="@string/exit"
-        android:textSize="30dp"
-        android:textColor="#000"
-        android:background="#8b00ff"/>
+        android:background="#fff"/>
 </RelativeLayout>
