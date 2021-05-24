@@ -11,4 +11,8 @@
     <string name="game_over">Игра окончена</string>
     <string name="home">На главную</string>
     <string name="adapter_hint">Введите количество</string>
+    <string name="add1">+1</string>
+    <string name="sub1">-1</string>
+    <string name="add5">+5</string>
+    <string name="sub5">-5</string>
 </resources>
