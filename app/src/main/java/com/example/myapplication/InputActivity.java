@@ -32,8 +32,8 @@ public class InputActivity extends Activity {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.input_layout);
-        PictureEtAdapter adapter = new PictureEtAdapte(this, make_p_et());
-        ListView listView = (ListView) findViewById(R.id.listView);
+        PictureEtAdapter adapter = new PictureEtAdapter(this, make_p_et());
+//        ListView listView = (ListView) findViewById(R.id.listView);
         EditText count_of_bombs = (EditText) findViewById(R.id.count_of_bombs);
         EditText count_of_androids = (EditText) findViewById(R.id.count_of_androids);
         EditText count_of_red_balls = (EditText) findViewById(R.id.count_of_red_balls);
@@ -90,14 +90,15 @@ public class InputActivity extends Activity {
         Bitmap[] bitmapArr = {BitmapFactory.decodeResource(DrawThread.context.getResources(), R.drawable.br),
                 BitmapFactory.decodeResource(DrawThread.context.getResources(), R.drawable.red_ball),
                 BitmapFactory.decodeResource(DrawThread.context.getResources(), R.drawable.andr)};
-        for (int i = 0; i < arr.length; i++) {
+        for (int i = 0; i < 3; i++) {
             PictureEt p_et = new PictureEt();
             p_et.bitmap = bitmapArr[i];
             arr[i] = p_et;
+            System.out.println(arr.length);
+            System.out.println(bitmapArr.length);
         }
         return arr;
     }
-
 
 }
 
